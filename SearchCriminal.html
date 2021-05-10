@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search Criminal Data</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+	<style type="text/css">
+		.dele{
+			background-color: #a1adad;
+			padding-top: 5%;
+		}
+		table{
+			visibility: hidden;
+		}
+		.button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 18px;
+  margin: 6px 0;
+  border: none;
+  cursor: pointer;
+ 
+}
+.id{
+}
+.forming{
+	border: 2px inset #82a3ff;
+	margin: 3% 30% 3% 30%;
+	padding: 5% 0% 0% 0%;
+	background-color: #a1adad
+}
+	</style>
+</head>
+<div  class="header">
+	<h3 align="center"><strong>SEARCH CRIMINAL DETAILS</strong></h3>
+	<p align="center" style="color: #d40606"><b>Note: The portal is only used by police officers who were given login credentials. It is used to search the data of criminals</b></p> 
+</div>
+<body>
+	<div class="dele" align="center">
+		<div class="container" >
+		<label for="search"><b>Enter the name of the criminal :</b></label>
+		<input type="text" name="search" id="search" size="50" /></br></br>
+		<input type="button" class="button" name="f" id="but" value="submit" onclick="searchRecord()" />
+		</div>
+	</div>
+</br>
+	<h4 align="center"> Criminal Details are displayed below if found</h4>
+	<div class="forming">
+				
+			<table  id="table" align="center" >
+
+				<tr>
+					
+					<td style="text-align:center"> <b><p id="fullname">Full Name :</p></b></td>
+				</tr>
+				<tr>
+					
+					<td style="text-align:center"><b> <p id="age">Age :</p></b></td>
+				</tr>
+				<tr>
+					
+					<td style="text-align:center"><b><p id="crime">Crime :</p></b></td>
+				</tr>
+				<tr>
+					
+					<td style="text-align:center"><b><p id="location">location :</p></b> </td>
+				</tr>
+				<tr>
+					
+					<td style="text-align:center"><b><p id="village">village : </p></b></td>
+				</tr>
+				<tr>
+					
+					<td style="text-align:center"><b><p id="district">district :</p></b></td>
+				</tr>
+				<tr>
+					
+					<td style="text-align:center"><b><p id="state">state : </p></b> </td>
+				</tr>
+				
+				<tr>
+					
+					<td style="text-align:center"> <b><p id="pincode">PINCODE :</p></b></td>
+				</tr>
+
+			</table>
+	</div>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
+	<script type="text/javascript">
+		var app = firebase.initializeApp({
+    		apiKey: "AIzaSyB8G25_6SW60uuWLW7VWpqvQeD-hUb6ZcA",
+    		authDomain: "weconnect-b5543.firebaseapp.com",
+    		databaseURL: "https://weconnect-b5543-default-rtdb.europe-west1.firebasedatabase.app",
+    		projectId: "weconnect-b5543",
+    		storageBucket: "weconnect-b5543.appspot.com",
+    		messagingSenderId: "772821230089",
+    		appId: "1:772821230089:web:4a6972cd472dccfd6aced8",
+    		measurementId: "G-E03S568MJ4"
+  		});
+  		var userId=1;
+  		function searchRecord() {
+ 	// body...
+ 		var name1 = document.getElementById("search").value;
+ 		var refer = firebase.database().ref("Criminal");
+
+
+ 		document.getElementById("age");
+ 		document.getElementById("crime");
+ 		document.getElementById("location");
+ 		document.getElementById("village");
+ 		document.getElementById("district");
+ 		document.getElementById("state");
+ 		document.getElementById("pincode");
+
+ 		var flag = true;
+		var refer = firebase.database().ref("Criminal");//+name1);
+ 		refer.orderByChild('name').equalTo(name1).limitToFirst(1).on("value", function(snapshot) {
+   			console.log(snapshot.val());
+   			if(snapshot.val()==null)
+   			{
+   				calling(false);
+   			}
+    			snapshot.forEach(function(allnames) { 
+				document.getElementById("fullname").innerHTML+= allnames.val().name;
+				document.getElementById("age").innerHTML+= allnames.val().age;
+ 				document.getElementById("crime").innerHTML+= allnames.val().crime;
+ 				document.getElementById("location").innerHTML+= allnames.val().location;
+ 				document.getElementById("village").innerHTML += allnames.val().village;
+ 				document.getElementById("district").innerHTML+= allnames.val().district;
+ 				document.getElementById("state").innerHTML += allnames.val().state;
+ 				document.getElementById("pincode").innerHTML += allnames.val().PINCODE;
+ 				console.log(allnames.val().age);
+ 				document.getElementById("table").style.visibility = "visible";
+ 				flag =false;
+    		});
+			});
+		
+	    	document.getElementById("search").value="";
+			
+		
+			//alert("The Details of Criminal "+name+" is added");
+ 		}
+ 		function calling(check)
+ 		{
+ 			if(check!=true)
+ 			{
+ 				alert("Criminal Not Found");
+ 			}
+ 		}
+ 		
+	</script>
+</body>
+</html>

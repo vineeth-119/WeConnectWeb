@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Criminal Details</title>
+	
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+	<style type="text/css">
+		.button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 18px;
+  margin: 6px ;
+  border: none;
+  cursor: pointer;
+}
+/*.header{
+	padding: 5% 0% 5% 0%;
+	background-color: #a1adad;
+
+}*/
+h3{
+	font-family: "Times New Roman", Times, serif;
+}
+.forming{
+	
+	margin: 5% 15% 3% 15%;
+	padding: 5% 0% 5% 0%;
+	background-color: #a1adad;
+	border: 1px outset #000;
+}
+
+input[type=text], input[type=password] {
+  			
+  			padding: 12px 20px;
+  			margin: 8px 0;
+  			display: inline-block;
+  			border: 1px solid #ccc;
+  		box-sizing: border-box;
+}
+
+#middle{
+	background-color: #a1adad;
+}
+	</style>
+
+</head>
+<div  class="header">
+	<h3 align="center"><strong>CRIMINAL DETAILS</strong></h3>
+	<p align="center" style="color: #d40606"><b>Note: The portal is only used by police officers who were given login credentials. It is used to add data of criminals</b></p> 
+</div>
+<body>
+	<div class="container" id="middle">
+		<form method="POST">
+			<img src="">
+			<div class="forming"> 
+				<h5 align="center" style="color: #990000"> Enter the exact details of the Criminal in the below form</h5></br>
+			<div class="table1">
+			<table align="center" cellpadding="10%" cellspacing="20%">
+
+				<tr>
+					<td><label for="CriminalName"><b>Full Name: </b></label> </td>
+					<td> <input type="text" name="CriminalName" id="Criminalname"  required size="40" /></br></td>
+				</tr>
+				<tr>
+					<td> <label for="age"><b>Age: </b></label></td>
+					<td> <input type="text" name="age" id="age1"  required size="40" /></br></td>
+				</tr>
+				<tr>
+					<td><label for="crime"><b>Crime: </b></label> </td>
+					<td><input type="text" name="crime" id="crime1"  required size="40" /></br> </td>
+				</tr>
+				<tr>
+					<td><label for="location"><b> location: </b></label> </td>
+					<td><input type="text" name="location" id="location1"  required size="40" /></br> </td>
+				</tr>
+				<tr>
+					<td><label for="village"><b>village: </b></label> </td>
+					<td> <input type="text" name="village" id="village1"  required size="40" /></br></td>
+				</tr>
+				<tr>
+					<td><label for="district"><b>district: </b></label> </td>
+					<td> <input type="text" name="district" id="district1"  required size="40" /></br></td>
+				</tr>
+				<tr>
+					<td><label for="state"><b>state: </b></label> </td>
+					<td><input type="text" name="state" id="state1" required size="40" /></br> </td>
+				</tr>
+				
+				<tr>
+					<td> <label for="PINCODE"><b>PINCODE: </b></label></td>
+					<td> <input type="text" name="PINCODE" id="PINCODE1"  required size="40"/></br></td>
+				</tr>
+				
+				<tr >
+					<td colspan="2" align="center"><input type="button" class="button" name="f" id="but" value="submit" onclick="writeData()" /></td>
+				</tr>
+			</table>
+		</div>
+			</div>
+		</form>
+	</div>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
+	<script type="text/javascript">
+		var app = firebase.initializeApp({
+    		apiKey: "AIzaSyB8G25_6SW60uuWLW7VWpqvQeD-hUb6ZcA",
+    		authDomain: "weconnect-b5543.firebaseapp.com",
+    		databaseURL: "https://weconnect-b5543-default-rtdb.europe-west1.firebasedatabase.app",
+    		projectId: "weconnect-b5543",
+    		storageBucket: "weconnect-b5543.appspot.com",
+    		messagingSenderId: "772821230089",
+    		appId: "1:772821230089:web:4a6972cd472dccfd6aced8",
+    		measurementId: "G-E03S568MJ4"
+  		});
+  		var userId=1;
+  		function writeData() {
+ 	// body...
+ 		var name1 = document.getElementById("Criminalname").value;
+		var age2 = document.getElementById("age1").value;
+		var crime3 = document.getElementById("crime1").value;
+		var location4 = document.getElementById("location1").value;
+		var village5 = document.getElementById("village1").value;
+		var district6 = document.getElementById("district1").value;
+		var state7 = document.getElementById("state1").value;
+		var pincode8 = document.getElementById("PINCODE1").value;
+		
+		
+
+		var refer = firebase.database().ref("Criminal/"+name1);
+	    
+  			refer.child("name").set(name1);
+  			refer.child("age").set(age2);
+  			refer.child("crime").set(crime3);
+  			refer.child("location").set(location4);
+  			refer.child("village").set(village5);
+  			refer.child("district").set(district6);
+  			refer.child("state").set(state7);
+  			refer.child("PINCODE").set(pincode8);
+	    	console.log("done");
+	    	document.getElementById("Criminalname").value="";
+			document.getElementById("age1").value="";
+			document.getElementById("crime1").value="";
+		 	document.getElementById("location1").value="";
+			document.getElementById("village1").value="";
+			document.getElementById("district1").value="";
+			document.getElementById("state1").value="";
+			document.getElementById("PINCODE1").value="";
+		
+			alert("The Details of Criminal "+name+" is added");
+ 		}
+ 		
+	</script>
+</body>
+</html>

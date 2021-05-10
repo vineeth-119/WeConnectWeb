@@ -1,0 +1,154 @@
+<html>
+<head>
+	<title>
+		We Connect
+	</title>
+	<style type="text/css">
+		body{
+			margin-right: 5%;
+			margin-left: 5%;
+			background-color: #c4e7f5;
+			
+		}
+		form {
+		  border: 3px solid #006127;
+		  width: 40%;
+		  padding:5%;
+		  background-color:#838d96 ;
+			}
+
+/* Full-width inputs */
+		input[type=text], input[type=password] {
+  			
+  			padding: 12px 20px;
+  			margin: 8px 0;
+  			display: inline-block;
+  			border: 1px solid #ccc;
+  		box-sizing: border-box;
+}
+p{
+	background-color: #a1adad;
+
+}
+img{
+	width: 18%
+}
+/* Set a style for all buttons */
+.button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+ 
+}
+label{
+	color: #540404;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+.mainhead{
+	margin-bottom: 2%;
+}
+
+.container{
+	margin: 5% 5% 5% 0% ;
+	background-color: #a1adad;
+	padding-top: 3%;
+	padding-bottom: 3%;
+}
+
+.inputs{
+	
+}
+.psw{
+	margin: 5%;
+}
+
+</style>
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyB8G25_6SW60uuWLW7VWpqvQeD-hUb6ZcA",
+    authDomain: "weconnect-b5543.firebaseapp.com",
+    databaseURL: "https://weconnect-b5543-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "weconnect-b5543",
+    storageBucket: "weconnect-b5543.appspot.com",
+    messagingSenderId: "772821230089",
+    appId: "1:772821230089:web:4a6972cd472dccfd6aced8",
+    measurementId: "G-E03S568MJ4"
+  };
+  // Initialize Firebase
+ function check(){
+  var name = document.getElementById("name").value;
+  var pass = document.getElementById("pass").value;
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  console.log("Hello");
+  var flag = true;
+  var refer = firebase.database().ref("Policelogin");
+  refer.on('value',function(snapshot){
+  	snapshot.forEach(
+  		function(current){
+  				
+  				var name1 =	current.val().name;
+  				var pass1 = current.val().password;
+  				if(name1.localeCompare(name)==0 && pass1.localeCompare(pass)==0)
+  				{
+  					location.href="MainFrame.html";
+  				}
+  				else
+  				{
+  					alert("Enter correct details");
+  				}
+  		});
+  });
+ 
+}
+</script>
+</head>
+<header >
+	<div class="mainhead" style="background-color:#a1adad">
+		<img src="E:\\icon.jpg" alt="ICON" align="left"/></br>
+		<p style="font-size:40px" align="center">
+			TELANGANA STATE
+		POLICE DEPARTMENT PORTAL</p>	</br>
+		</div>
+</header>
+	<BODY>
+		<div align="center" class="main">
+			<form method="post" >
+			   	<h4><strong>Enter your credentials correctly</strong></h4>
+		    	<div class="container" width = "40%" align="center">
+		  			</br>
+    		 		<div class="inputs" align = "center">
+    		 			<label for="uname"><b>Username :</b></label>
+    					<input type="text" id="name" name="uname" required>
+  					</div>
+    				
+     				<div class="inputs" align = "center">
+	    				<label for="psw"><b>Password :</b></label>
+	    				<input type="password" id="pass" name="psw" required>
+					</div>
+ 					<div align = "center">
+    					<input type="button" class = "button" value="Submit" onclick="check()">
+					</div>
+				</br>
+    				 <span class="psw" style="margin-bottom: 10%"><a href="#">Forgot password?</a></span>
+  				</div>
+  			</form>
+		</div>
+	
+	</BODY>
+</html>

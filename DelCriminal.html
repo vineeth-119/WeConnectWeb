@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Delete Criminal Data</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+	<style type="text/css">
+		.dele{
+			background-color: #a1adad;
+			padding-top: 5%;
+		}
+		.button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 18px;
+  margin: 6px 0;
+  border: none;
+  cursor: pointer;
+ 
+}
+	</style>
+</head>
+<div  class="header">
+	<h3 align="center"><strong>DELETE CRIMINAL DETAILS</strong></h3>
+	<p align="center" style="color: #d40606"><b>Note: The portal is only used by police officers who were given login credentials. It is used to Delete the data of criminals</b></p> 
+</div>
+<body>
+	<div class="dele" align="center">
+		<div class="container" >
+		<label for="delete"><b>Enter the name of the criminal :</b></label>
+		<input type="text" name="delete" id="delete" size="50" /></br></br>
+		<input type="button" class="button" name="f" id="but" value="submit" onclick="delRecord()" />
+
+		</div>
+	</div>
+</div>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
+	<script type="text/javascript">
+		var app = firebase.initializeApp({
+    		apiKey: "AIzaSyB8G25_6SW60uuWLW7VWpqvQeD-hUb6ZcA",
+    		authDomain: "weconnect-b5543.firebaseapp.com",
+    		databaseURL: "https://weconnect-b5543-default-rtdb.europe-west1.firebasedatabase.app",
+    		projectId: "weconnect-b5543",
+    		storageBucket: "weconnect-b5543.appspot.com",
+    		messagingSenderId: "772821230089",
+    		appId: "1:772821230089:web:4a6972cd472dccfd6aced8",
+    		measurementId: "G-E03S568MJ4"
+  		});
+  		var userId=1;
+  		function delRecord() {
+ 	// body...
+ 		var name1 = document.getElementById("delete").value;
+		
+
+		var refer = firebase.database().ref("Criminal");//+name1);
+		var check = confirm("Are you sure to delete the record?")
+		var flag=false;
+			if(check==true)
+			{
+				
+	  				refer.child(name1).remove();
+	  				alert("Criminal Record Deleted");
+	  		}
+			else
+			{
+					alert("Criminal Not Found");
+			}
+	    	document.getElementById("delete").value="";
+			
+		
+			//alert("The Details of Criminal "+name+" is added");
+ 		}
+ 		
+	</script>
+</body>
+</html>

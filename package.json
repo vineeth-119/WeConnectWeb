@@ -1,0 +1,14 @@
+{
+  "name": "webconnect",
+  "version": "1.0.0",
+  "description": "web app for police",
+  "main": "1",
+  "scripts": {
+    "test": "vinee"
+  },
+  "author": "vineeth sharna",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^8.4.3"
+  }
+}

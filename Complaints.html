@@ -1,0 +1,158 @@
+<html>
+<head>
+	<title>Complaint Details</title>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+	<style type="text/css">
+		thead{
+			background-color: #a1adad;
+		}
+	</style>
+</head>
+<body >
+	<div id="noc">
+		
+	<table class="table">
+		<thead>
+			<th>S.No</th>
+			<th>Full Name</th>
+			<th>Aadhar Number</th>
+			<th>Age</th>
+			<th>Phone Number</th>
+			<th>Subject</th>
+			<th>Complaint</th>
+			<th>Locality</th>
+			<th>Village</th>
+			<th>District</th>
+			<th>State</th>
+			<th>PINCODE</th>
+      <th>Email-ID</th>
+		</thead>
+		<tbody id="tbody1">
+		
+		</tbody>
+	</table>
+<script type="text/javascript">
+	
+</script>
+	<script type="text/javascript" id="MainScript">
+		
+ 		var app = firebase.initializeApp({
+    		apiKey: "AIzaSyB8G25_6SW60uuWLW7VWpqvQeD-hUb6ZcA",
+    		authDomain: "weconnect-b5543.firebaseapp.com",
+    		databaseURL: "https://weconnect-b5543-default-rtdb.europe-west1.firebasedatabase.app",
+    		projectId: "weconnect-b5543",
+    		storageBucket: "weconnect-b5543.appspot.com",
+    		messagingSenderId: "772821230089",
+    		appId: "1:772821230089:web:4a6972cd472dccfd6aced8",
+    		measurementId: "G-E03S568MJ4"
+  		});
+
+ 		function selectData() {
+ 			// body...
+ 			// document.getElementById("p1").innerHTML = "New text!";
+ 			//var name = "vinee";
+ 			firebase.database().ref('Complaints').on('value',
+  				function(AllRecords) {
+
+  					AllRecords.forEach(
+  						function(CurrentRecord){
+  							var name = CurrentRecord.val().name;
+  							var aadharNumber = CurrentRecord.val().aadharNumber;
+  							var age = CurrentRecord.val().age;
+  							var phoneNumber = CurrentRecord.val().phoneNumber;
+  							var subj = CurrentRecord.val().suject;
+  							var comp = CurrentRecord.val().complaint;
+  							var Locality = CurrentRecord.val().locality;
+  							var village = CurrentRecord.val().village;
+  							var district = CurrentRecord.val().district;
+  							var state = CurrentRecord.val().state;
+  							var pincode = CurrentRecord.val().pincode;
+                var email = CurrentRecord.val().email;
+  							AddItemsToTable(name,aadharNumber,age,phoneNumber,subj,comp,Locality,village,district,state,pincode,email);
+                // sendMail(email);
+
+  						}	
+  					);
+  				});
+ 		}
+  			
+window.onload = selectData;
+  		var stdNo = 0;
+  		function AddItemsToTable(name,aadharNumber,age,phoneNumber,subj,comp,Locality,village,district,state,pincode,email) {
+  			// body...
+  			var tbody = document.getElementById('tbody1');
+  			var trow = document.createElement('tr');
+  			var td1 = document.createElement('td');
+  			var td2 = document.createElement('td');
+  			var td3 = document.createElement('td');
+  			var td4 = document.createElement('td');
+  			var td5 = document.createElement('td');
+  			var td6 = document.createElement('td');
+  			var td7 = document.createElement('td');
+  			var td8 = document.createElement('td');
+  			var td9 = document.createElement('td');
+  			var td10 = document.createElement('td');
+  			var td11 = document.createElement('td');
+  			var td12 = document.createElement('td');
+        var td13 = document.createElement('td');
+  			
+  			td1.innerHTML =++stdNo; 
+  			td2.innerHTML = name;
+  			td3.innerHTML = aadharNumber;
+  			td4.innerHTML = age;
+  			td5.innerHTML = phoneNumber;
+  			td6.innerHTML = subj;
+  			td7.innerHTML = comp;
+  			td8.innerHTML = Locality;
+  			td9.innerHTML = village;
+  			td10.innerHTML = district;
+  			td11.innerHTML = state;
+  			td12.innerHTML = pincode;
+        td13.innerHTML = email;
+  			
+  			trow.appendChild(td1);
+  			trow.appendChild(td2);
+  			trow.appendChild(td3);
+  			trow.appendChild(td4);
+  			trow.appendChild(td5);
+  			trow.appendChild(td6);
+  			trow.appendChild(td7);
+  			trow.appendChild(td8);
+  			trow.appendChild(td9);
+  			trow.appendChild(td10);
+  			trow.appendChild(td11);
+  			trow.appendChild(td12);
+        trow.appendChild(td13);
+
+  			tbody.appendChild(trow);
+
+  		}
+      function sendMail(usermail) {
+          // body...
+           Email.send({
+        Host: "smtp.gmail.com",
+        Username: "weconnectpublicpoliceproject@gmail.com",
+        Password: "ImIronMan@2021",
+        To: usermail,
+        From: "vineethsharma119@gmail.com",
+        Subject: "Complaint Received",
+        Body: "Our police officals will contact you soon and will do the est to solve your problem!!"
+      }).then(
+          alert("mail sent successfully")
+        );
+    }
+      
+
+	</script>
+	<!-- <script src="/__/firebase/8.5.0/firebase.js"></script>
+	<script src="/__/firebase/init.js"></script>  -->
+	</div>
+</body>
+</html>
